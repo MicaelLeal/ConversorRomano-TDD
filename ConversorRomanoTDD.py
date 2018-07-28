@@ -35,6 +35,7 @@ class ConversorRomano(object):
 		if (tam <= 1):
 			if numeroRomano not in self.algarismos:
 				mensagem = "Algarismo passado eh invalido: "+ numeroRomano
+
 		else:
 			for letra in numeroRomano:
 				if letra not in self.algarismos:
@@ -43,26 +44,36 @@ class ConversorRomano(object):
 			if self.converterRecursivo(numeroRomano) in self.algarismos.values():
 				mensagem = "Numero Romano passado possui sequencia de algarismos invalida: "+ numeroRomano
 
-			algarismosInvalidos = ["IIII", "XXXX", "CCCC", "MMMM"]
-			for algarismo in algarismosInvalidos:
-				if algarismo in numeroRomano:
-					mensagem = "Numero Romano passado possui sequencia de algarismos invalida: "+ numeroRomano
-
-			for i in range(1, tam):
-				valorDoAtual = self.converterRecursivo(numeroRomano[i])
-				valorDoAnterior = self.converterRecursivo(numeroRomano[i-1])
-				valorCalculado = self.converterRecursivo(numeroRomano[:i])
+			elif (tam == 2):
+				valorDoAtual = self.converterRecursivo(numeroRomano[1])
+				valorDoAnterior = self.converterRecursivo(numeroRomano[0])
 				valoresNaoRepetiveis = [5, 50, 500]
-
-				if (valorDoAtual > valorDoAnterior):
-					if (valorDoAnterior*5 != valorDoAtual and valorDoAnterior*10 != valorDoAtual):
-						mensagem = "asdf2"
-
 				if (valorDoAtual >= valorDoAnterior):
 					if (valorDoAnterior in valoresNaoRepetiveis):
 						mensagem = "Nao repetiveis repetindo"
+					elif (valorDoAtual > valorDoAnterior and valorDoAnterior*5 != valorDoAtual and valorDoAnterior*10 != valorDoAtual):
+						mensagem = "asdf2"
+
+			elif (tam == 3):
+				for i in range(1, tam):
+					self.validarNumeroRecebido(numeroRomano[i-1]+numeroRomano[i])
+					valorDoAtual = self.converterRecursivo(numeroRomano[i])
+					valorDoAnterior = self.converterRecursivo(numeroRomano[i-1])
+					valorCalculado = self.converterRecursivo(numeroRomano[:i])
+
+				if (valorDoAtual >= valorDoAnterior):
 					if (valorCalculado < valorDoAtual and valorCalculado not in self.algarismos.values()):
 						mensagem = "deu bom"
+
+			else:
+				algarismosInvalidos = ["IIII", "XXXX", "CCCC", "MMMM"]
+				for algarismo in algarismosInvalidos:
+					if algarismo in numeroRomano:
+						mensagem = "Numero Romano passado possui sequencia de algarismos invalida: "+ numeroRomano
+
+				for i in range(2, tam):
+					self.validarNumeroRecebido(numeroRomano[i-2]+numeroRomano[i-1]+numeroRomano[i])
+
 
 		if (mensagem != ""):
 			raise ValueError(mensagem)		
