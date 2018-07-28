@@ -52,7 +52,7 @@ class ConversorRomano(object):
 					if (valorDoAnterior in valoresNaoRepetiveis):
 						mensagem = "Nao repetiveis repetindo"
 					elif (valorDoAtual > valorDoAnterior and valorDoAnterior*5 != valorDoAtual and valorDoAnterior*10 != valorDoAtual):
-						mensagem = "asdf2"
+						mensagem = "Nummero passado contem sequencias incorretas"
 
 			elif (tam == 3):
 				for i in range(1, tam):
@@ -63,7 +63,7 @@ class ConversorRomano(object):
 
 				if (valorDoAtual >= valorDoAnterior):
 					if (valorCalculado < valorDoAtual and valorCalculado not in self.algarismos.values()):
-						mensagem = "deu bom"
+						mensagem = "Numero passado eh invalido"
 
 			else:
 				algarismosInvalidos = ["IIII", "XXXX", "CCCC", "MMMM"]
